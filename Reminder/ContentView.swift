@@ -7,17 +7,25 @@
 
 import SwiftUI
 
+
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        VStack(alignment: .leading) { 
+            Text("Reminder")
+                .font(.title)
+                .fontWeight(.bold)
+                .padding([.top, .leading], 16.0)
+            Spacer()
         }
-        .padding()
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+        
+        Spacer()
+        
+        ReminderCard()
     }
 }
+    
+
 
 #Preview {
     ContentView()

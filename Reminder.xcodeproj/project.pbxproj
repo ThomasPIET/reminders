@@ -32,8 +32,8 @@
 		E93FA3D12D8C29AB00D8CBBC = {
 			isa = PBXGroup;
 			children = (
-				E93FA3DC2D8C29AB00D8CBBC /* Reminder */,
 				E93FA3DB2D8C29AB00D8CBBC /* Products */,
+				E93FA3DC2D8C29AB00D8CBBC /* Reminder */,
 			);
 			sourceTree = "<group>";
 		};
