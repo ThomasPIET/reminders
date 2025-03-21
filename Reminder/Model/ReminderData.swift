@@ -7,10 +7,10 @@
 
 import Foundation
 
-struct Reminder: Codable {
-    var Title: String
-    var Description: String
-    var Date: Date
-    var isDone: Bool
+public struct Reminder: Codable, Identifiable {
+    public var id: Int
+    public var title: String
+    public var description: String
+    public var date: Date
+    public var isDone: Bool
 }
-	
