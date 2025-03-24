@@ -19,29 +19,33 @@ public struct ReminderRow: View {
                         toggleIsDone()
                     }
                 }) {
-                   ZStack {
+                    ZStack {
                         Circle()
-                           .stroke(lineWidth: 1)
-                           .foregroundColor(.blue)
-                           .frame(width: 30, height: 30)
+                            .stroke(lineWidth: 1.5)
+                            .foregroundColor(.blue)
+                            .frame(width: 30, height: 30)
+
                         Circle()
-                           .fill(.blue)
+                            .fill(.blue)
                             .opacity(isFilled ? 1 : 0)
                             .frame(width: 30, height: 30)
+                            .scaleEffect(isFilled ? 1 : 0.1)
+                            .transition(.scale)
+
+                            .overlay(
+                                Image(systemName: "checkmark")
+                                    .foregroundColor(.white)
+                                    .font(.system(size: 14, weight: .bold))
+                                    .transition(.scale.combined(with: .opacity))
+                            )
                     }
                 }
-                
-                
-                Spacer()
+
                 Text(reminder.title)
                     .font(.headline)
-                    .frame(alignment: .leading)
+                    .padding(.leading)
             }
             .padding()
         }
     }
 }
-
-
-
-

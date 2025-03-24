@@ -17,7 +17,7 @@ struct ContentView: View {
                 .fontWeight(.bold)
                 .padding([.top, .leading], 16.0)
 
-            List {
+            List{
                 ForEach(reminderList.indices, id: \.self) { index in
                     ReminderRow(reminder: $reminderList[index])
                 }
