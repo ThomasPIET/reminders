@@ -8,26 +8,46 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var reminderList = reminders
-
+    @StateObject private var store = ReminderStore.shared
+    @State private var isShowingNewReminder = false
+    
+    func deleteItems(at offsets: IndexSet) {
+          offsets.forEach { index in
+              store.deleteReminder(at: index)
+          }
+      }
+    
     var body: some View {
-        VStack(alignment: .leading) {
-            Text("Reminder")
-                .font(.title)
-                .fontWeight(.bold)
-                .padding([.top, .leading], 16.0)
-
-            List{
-                ForEach(reminderList.indices, id: \.self) { index in
-                    ReminderRow(reminder: $reminderList[index])
+        NavigationView {
+            VStack {
+                List {
+                    ForEach(store.reminders.indices, id: \.self) { index in
+                                            ReminderRow(reminder: $store.reminders[index])
+                                                .onChange(of: store.reminders[index]) { _, _ in
+                                                    store.saveReminders()
+                                                }
+                                        }
+                    .onDelete(perform: deleteItems)
                 }
+                .navigationTitle("Reminders")
+                .toolbar{
+                    ToolbarItem(placement: .confirmationAction) {
+                        Button("Add Reminder") {
+                            isShowingNewReminder.toggle()
+                        }
+                            
+                    }
+                }
+              
             }
         }
-					
-        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-
-        Spacer()
-
+        .sheet(isPresented: $isShowingNewReminder) {
+            NewReminderView {title, dueDate, isCompleted in
+                let newId = (store.reminders.map { $0.id }.max() ?? 0) + 1
+                let newReminder = Reminder(id: newId, title: title, date: dueDate, isDone: isCompleted)
+                store.addReminder(newReminder)
+            }
+        }
     }
 }
 

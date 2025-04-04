@@ -11,7 +11,15 @@ import SwiftUI
 struct ReminderApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            TabView {
+                Tab("Reminder", systemImage: "clock") {
+                    ContentView()
+                }
+                Tab("Account", systemImage: "person.crop.circle.fill") {
+                    Backlog()
+                   }
+            }
         }
     }
 }
+

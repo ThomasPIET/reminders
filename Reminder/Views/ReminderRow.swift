@@ -7,7 +7,7 @@ public struct ReminderRow: View {
     func toggleIsDone() {
         reminder.isDone.toggle()
         isFilled.toggle()
-        print("Reminder is \(reminder.isDone ? "true" : "false")")
+        print("\(reminder.title) is \(reminder.isDone ? "true" : "false")")
     }
 
     public var body: some View {
@@ -46,6 +46,9 @@ public struct ReminderRow: View {
                     .padding(.leading)
             }
             .padding()
+        }
+        .onAppear() {
+            isFilled = reminder.isDone
         }
     }
 }
